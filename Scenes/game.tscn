@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjiu53lywtdl6"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_aug36"]
+[ext_resource type="PackedScene" uid="uid://rd056rnxnb8w" path="res://Scenes/player.tscn" id="1_cyy7p"]
+[ext_resource type="PackedScene" uid="uid://dam2hnfufok8y" path="res://Scenes/ground.tscn" id="2_gxkgv"]
+[ext_resource type="PackedScene" uid="uid://e1gpkuwp3lgt" path="res://Scenes/game_over_ui.tscn" id="5_cbdci"]
+[ext_resource type="FontFile" uid="uid://bqlkk8t3w7sca" path="res://Asset/Enemy/Font/CharleeDoodles.ttf" id="6_a58ky"]
+[ext_resource type="PackedScene" uid="uid://b2tx10xokcvor" path="res://Scenes/parallax_background.tscn" id="7_0sujg"]
+[ext_resource type="AudioStream" uid="uid://cj5pg3lsxdydh" path="res://Asset/Audio/title sound.ogg" id="8_mjrpq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wb007"]
+font = ExtResource("6_a58ky")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l0tm"]
+font_size = 42
+font_color = Color(0.839216, 1, 1, 1)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_aug36")
+
+[node name="ground" parent="." instance=ExtResource("2_gxkgv")]
+position = Vector2(38, 162)
+
+[node name="Player" parent="." instance=ExtResource("1_cyy7p")]
+z_index = 1
+position = Vector2(192, 344)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="TopPost" type="Marker2D" parent="."]
+position = Vector2(1181, 472)
+
+[node name="BotPost" type="Marker2D" parent="."]
+position = Vector2(1181, 586)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="game_over_UI" parent="HUD" instance=ExtResource("5_cbdci")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.5
+offset_top = -239.0
+offset_right = 440.5
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 45.0
+grow_horizontal = 0
+text = "Score:  000"
+label_settings = SubResource("LabelSettings_wb007")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("7_0sujg")]
+
+[node name="titlesound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_mjrpq")
+
+[node name="decorTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="quiz" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="quiz"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.133333)
+
+[node name="Label" type="Label" parent="quiz"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -29.0
+offset_right = 92.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Question"
+label_settings = SubResource("LabelSettings_1l0tm")
+
+[node name="button1" type="Button" parent="quiz"]
+offset_left = 403.0
+offset_top = 390.0
+offset_right = 468.0
+offset_bottom = 421.0
+text = "answer"
+
+[node name="button2" type="Button" parent="quiz"]
+offset_left = 655.0
+offset_top = 394.0
+offset_right = 720.0
+offset_bottom = 425.0
+text = "answer"
+
+[node name="button3" type="Button" parent="quiz"]
+offset_left = 405.0
+offset_top = 515.0
+offset_right = 470.0
+offset_bottom = 546.0
+text = "answer"
+
+[node name="button4" type="Button" parent="quiz"]
+offset_left = 660.0
+offset_top = 513.0
+offset_right = 725.0
+offset_bottom = 544.0
+text = "answer"
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="decorTimer" to="." method="_on_decor_timer_timeout"]
+[connection signal="pressed" from="quiz/button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="quiz/button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="quiz/button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="quiz/button4" to="." method="_on_button_4_pressed"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://e1gpkuwp3lgt"]
+
+[ext_resource type="FontFile" uid="uid://bqlkk8t3w7sca" path="res://Asset/Enemy/Font/CharleeDoodles.ttf" id="1_ukx6k"]
+[ext_resource type="Script" path="res://Scripts/game_over_ui.gd" id="1_vu47t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fh255"]
+font = ExtResource("1_ukx6k")
+font_size = 210
+
+[sub_resource type="LabelSettings" id="LabelSettings_5k7jv"]
+font = ExtResource("1_ukx6k")
+font_size = 70
+
+[node name="game_over_UI" type="Panel"]
+visible = false
+offset_right = 1156.0
+offset_bottom = 638.0
+script = ExtResource("1_vu47t")
+
+[node name="gameover" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_fh255")
+
+[node name="presslabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.490917
+anchor_top = 0.791536
+anchor_right = 0.490917
+anchor_bottom = 0.791536
+offset_left = -271.5
+offset_top = -63.0
+offset_right = 271.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press space to restart"
+label_settings = SubResource("LabelSettings_5k7jv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqdjp3mkgckic"]
+
+[ext_resource type="Script" path="res://Scenes/decoration.gd" id="1_wcnr1"]
+[ext_resource type="Texture2D" uid="uid://cv5jonsvfc3j6" path="res://Asset/teleport-book.png" id="2_khdek"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhwbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_khdek")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gr7b7"]
+radius = 46.3249
+
+[node name="decoration" type="Area2D"]
+script = ExtResource("1_wcnr1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -3)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rhwbd")
+animation = &"1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gr7b7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

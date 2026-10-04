@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwb62lyh7lnpp"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_2cbxg"]
+[ext_resource type="FontFile" uid="uid://bqlkk8t3w7sca" path="res://Asset/Enemy/Font/CharleeDoodles.ttf" id="1_276rf"]
+[ext_resource type="AudioStream" uid="uid://cvwce7dyif1qd" path="res://Asset/Audio/game sound.ogg" id="3_5w6be"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w0ypj"]
+font = ExtResource("1_276rf")
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_ajnv8"]
+font = ExtResource("1_276rf")
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_c44f0"]
+font = ExtResource("1_276rf")
+font_size = 210
+
+[sub_resource type="LabelSettings" id="LabelSettings_gg88s"]
+font = ExtResource("1_276rf")
+font_size = 70
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2cbxg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.602578, 0, 0.187227, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Hi-Scorelabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Highscore"
+label_settings = SubResource("LabelSettings_w0ypj")
+
+[node name="Scorelabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_ajnv8")
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Knowledge Run"
+label_settings = SubResource("LabelSettings_c44f0")
+
+[node name="Presslabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Press space to start the game"
+label_settings = SubResource("LabelSettings_gg88s")
+
+[node name="gamesound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5w6be")
